@@ -1,24 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React from 'react'
 
-const AllCars = () => {
+const AllCars = ({ cars }) => {
 
-    const [cars, setCars] = useState([])
-
-    useEffect(() => {
-        axios.get('http://localhost:8000')
-        .then((res) => {
-            setCars(res.data)
-        })
-    }, [])
-    console.log(cars)
-
-
+  console.log(cars)
   return (
     <div>
-        {cars.map(car => car.model)}
+      {cars.map((car) => {
+        return (
+        <h2 key={ car.id }>{car.year} {car.make} {car.model}</h2>
+        )
+      })}
     </div>
-  )
+)
 }
 
 export default AllCars
