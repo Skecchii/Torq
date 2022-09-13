@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import API from 'utils/BackendAPI'
-import CarAPI from 'utils/CarAPI'
 
 const NewCar = ({ cars, setCars }) => {
 
@@ -29,34 +28,11 @@ const handleSubmit = (e) => {
     API.post('/create', formData).then(res => {
         setFormData(initialState)
         addCar(res.data)
-        navigate('/', {replace: true})
+        navigate('/cars')
     })
 }
 
   return (
-    // <form onSubmit={handleSubmit}>
-    //     <div>
-    //         <label htmlFor='year'>Year</label>
-    //         <input id='year' name='year' type='select' onChange={handleChange}></input>
-    //     </div>
-    //     <div>
-    //         <label htmlFor='make'>Make</label>
-    //         <input id='make' name='make' type='select' onChange={handleChange}></input>
-    //     </div>
-    //     <div>
-    //         <label htmlFor='model'>Model</label>
-    //         <input id='model' name='model' type='select' onChange={handleChange}></input>
-    //     </div>
-    //     <div>
-    //         <label htmlFor='mileage'>Mileage</label>
-    //         <input id='mileage' name='mileage' type='select' onChange={handleChange}></input>
-    //     </div>
-    //     <div>
-    //         <label htmlFor='image'>Image</label>
-    //         <input id='image' name='image' type='file' accept='image/png, image/jpeg' onChange={handleChange}></input>
-    //     </div>
-    //     <button type='submit'>Add Car</button>
-    // </form>
     <form onSubmit={handleSubmit}>
     <div>
         <label htmlFor='year'>Year</label>
@@ -95,6 +71,7 @@ const handleSubmit = (e) => {
     </div>
     <button type='submit'>Add Car</button>
 </form>
+
   )
 }
 

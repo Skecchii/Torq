@@ -9,7 +9,7 @@ class Owner(models.Model):
         return f'{self.name}'
     
 class Car(models.Model):
-    owner = models.ForeignKey('owner', on_delete=models.CASCADE, related_name='cars')
+    owner = models.ForeignKey(Owner, on_delete=models.CASCADE, related_name='cars')
     year = models.IntegerField()
     make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
@@ -17,4 +17,4 @@ class Car(models.Model):
     mileage = models.IntegerField()
     
     def __str__(self):
-        return f"{self.owner.name}'s {self.year} {self.make} {self.model}"
+        return f"{self.owner} {self.year} {self.make} {self.model}"
