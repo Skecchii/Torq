@@ -1,12 +1,12 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+
+import Table from 'react-bootstrap/Table'
 
 const AllCars = ({ cars }) => {
   return (
-    <div>
-      <div>
-        <table>
+      <Table striped bordered>
           <thead>
             <tr>
               <th>Year</th>
@@ -29,9 +29,7 @@ const AllCars = ({ cars }) => {
               );
             })}
           </tbody>
-        </table>
-      </div>
-    </div>
+      </Table>
   );
 };
 

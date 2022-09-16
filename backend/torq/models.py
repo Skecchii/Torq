@@ -7,14 +7,19 @@ class Owner(models.Model):
     
     def __str__(self):
         return f'{self.name}'
+
+# explicitly set upload path and filename
+def upload_to(instance, filename):
+        return 'images/{filename}'.format(filenmae=filename)
     
 class Car(models.Model):
-    owner = models.ForeignKey(Owner, on_delete=models.CASCADE, related_name='cars')
     year = models.IntegerField()
     make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    image = models.ImageField(upload_to=upload_to, null=True, blank=True)
     mileage = models.IntegerField()
     
+   
+    
     def __str__(self):
-        return f"{self.owner} {self.year} {self.make} {self.model}"
+        return f"{self.year} {self.make} {self.model}"

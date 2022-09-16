@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 
 import API from "utils/BackendAPI";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 const CarDetail = ({ cars }) => {
   const navigate = useNavigate();
@@ -11,51 +13,52 @@ const CarDetail = ({ cars }) => {
   const [car, setCar] = useState({});
 
   useEffect(() => {
-    API.get(`/${carId}/`).then((res) => setCar(res.data));
+    API.get(`/${carId}/`).then((res) => setCar(res.data)).catch((err) => console.error(err))
   }, []);
 
-  const updateState = (id) => setCar(cars.filter(car => car.id !== id));
+  const updateState = (id) => setCar(cars.filter(car => car.id !== id))
 
   const deleteCar = (carId) => {
-    API.delete(`/${carId}/delete`).then((res) => updateState(carId));
-    navigate("/cars");
+    API.delete(`/${carId}/delete`).then((res) => updateState(carId))
+    navigate("/cars")
+    window.location.reload()
   };
 
-  //   // function got from https://yizhiyue.me/2019/04/09/an-elegant-way-to-solve-adding-commas-between-every-3-digits-problem-in-javascript
-  //   const addComma = (num) => {
-  //     if (num === null) return;
+  // // function got from https://yizhiyue.me/2019/04/09/an-elegant-way-to-solve-adding-commas-between-every-3-digits-problem-in-javascript
+  // const addComma = async(num) => {
+  //   if (num === null) return;
 
-  //     return (
-  //       num
-  //         .toString() // transform the number to string
-  //         .split("") // transform the string to array with every digit becoming an element in the array
-  //         .reverse() // reverse the array so that we can start process the number from the least digit
-  //         .map((digit, index) =>
-  //           index != 0 && index % 3 === 0 ? `${digit},` : digit
-  //         ) // map every digit from the array.
-  //         // If the index is a multiple of 3 and it's not the least digit,
-  //         // that is the place we insert the comma behind.
-  //         .reverse() // reverse back the array so that the digits are sorted in correctly display order
-  //         .join("")
-  //     ); // transform the array back to the string
-  //   }
+  //   return (
+  //     await num
+  //       .toString() // transform the number to string
+  //       .split("") // transform the string to array with every digit becoming an element in the array
+  //       .reverse() // reverse the array so that we can start process the number from the least digit
+  //       .map((digit, index) =>
+  //         index != 0 && index % 3 === 0 ? `${digit},` : digit
+  //       ) // map every digit from the array.
+  //       // If the index is a multiple of 3 and it's not the least digit,
+  //       // that is the place we insert the comma behind.
+  //       .reverse() // reverse back the array so that the digits are sorted in correctly display order
+  //       .join("")
+  //   ); // transform the array back to the string
+  // };
+
+  
 
   return (
-    <div>
-      <img src={car.image} alt={car.model} />
-      <h1>
+    <Card style={{ width: "18rem" }}>
+      <Card.Img variant="top" src={`${car.image}/`} alt={car.model} />
+      <Card.Title>
         {car.year} {car.make} {car.model}
-      </h1>
-      {/* <h2>miles:{addComma(car.mileage)}</h2> */}
+      </Card.Title>
+      <Card.Subtitle>miles:{car.mileage}</Card.Subtitle>
       <div>
-        <button type="submit" onClick={() => deleteCar(car.id)}>
-          Delete
-        </button>
-        <Link to={`/cars/${carId}/edit`}><button type="submit" >
-          Edit  
-        </button></Link>
+        <Button type="submit" onClick={() => deleteCar(car.id)}>Delete</Button>
+        <Link to={`/cars/${carId}/edit`}>
+          <Button type="submit">Edit</Button>
+        </Link>
       </div>
-    </div>
+    </Card>
   );
 };
 

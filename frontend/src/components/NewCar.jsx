@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import API from 'utils/BackendAPI'
 
-const NewCar = ({ cars, setCars }) => {
+import { useNavigate } from 'react-router-dom'
+
+import API from 'utils/BackendAPI'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
+import Make from 'utils/CarData/Make'
+import Year from 'utils/CarData/Year'
+import Model from 'utils/CarData/Model'
+
+const NewCar = ({ cars, setCars, models}) => {
 
 const navigate = useNavigate()
 
@@ -11,13 +19,12 @@ const initialState = {
     make: '',
     model: '',
     mileage: '',
-    image: ''
+    image: '',
 }
 
 const addCar = (car) => {
     setCars([...cars, car])
 }
-
 const [formData, setFormData] = useState(initialState)
 
 const handleChange = (e) => {
@@ -32,45 +39,64 @@ const handleSubmit = (e) => {
     })
 }
 
+let modelArr = []
+Model.forEach(model => {
+    if (!modelArr.includes(model)) {
+        modelArr.push(model)
+    }
+})
+
   return (
-    <form onSubmit={handleSubmit}>
-    <div>
-        <label htmlFor='year'>Year</label>
-        <select defaultValue={'DEFAULT'} id='year' name='year' onChange={handleChange}>
+    <Form onSubmit={handleSubmit}>
+    <Form.Group>
+        <Form.Label htmlFor='year'>Year</Form.Label>
+        <Form.Select defaultValue={'DEFAULT'} id='year' name='year' onChange={handleChange}>
             <option value='DEFAULT' disabled>Select Year</option>
-            <option>2022</option>
-            <option>2021</option>
-            <option>2020</option>
-        </select>
-    </div>
-    <div>
-        <label htmlFor='make'>Make</label>
-        <select defaultValue={'DEFAULT'} id='make' name='make' onChange={handleChange}>
+            {Year.map((option, index) => {
+                return (
+                    <option key={index} value={option}>
+                        {option}
+                    </option>
+                )
+            })}
+        </Form.Select>
+    </Form.Group>
+    <Form.Group>
+        <Form.Label htmlFor='make'>Make</Form.Label>
+        <Form.Select defaultValue={'DEFAULT'} id='make' name='make' onChange={handleChange}>
             <option value='DEFAULT' disabled>Select Make</option>
-            <option>Honda</option>
-            <option>Mazda</option>
-            <option>Toyota</option>
-        </select>
-    </div>
-    <div>
-        <label htmlFor='model'>Model</label>
-        <select defaultValue={'DEFAULT'} id='model' name='model' onChange={handleChange}>
+            {Make.map((option,index) => {
+                return (
+                    <option key={index} value={option}>
+                        {option}
+                    </option>
+                )
+            })}
+        </Form.Select>
+    </Form.Group>
+    <Form.Group>
+        <Form.Label htmlFor='model'>Model</Form.Label>
+        <Form.Select defaultValue={'DEFAULT'} id='model' name='model' onChange={handleChange}>
             <option value='DEFAULT' disabled>Select Model</option>
-            <option>Civic</option>
-            <option>RX-7</option>
-            <option>Tundra</option>
-        </select>
-    </div>
-    <div>
-        <label htmlFor='mileage'>Mileage</label>
-        <input id='mileage' name='mileage' type='number' onChange={handleChange}></input>
-    </div>
-    <div>
-        <label htmlFor='image'>Image</label>
-        <input id='image' name='image' type='file' accept='image/png, image/jpeg' onChange={handleChange}></input>
-    </div>
-    <button type='submit'>Add Car</button>
-</form>
+            {modelArr.sort().map((option, index) => {
+                return (
+                    <option key={index} value={option}>
+                        {option}
+                    </option>
+                )
+            })}
+        </Form.Select>
+    </Form.Group>
+    <Form.Group>
+        <Form.Label htmlFor='mileage'>Mileage</Form.Label>
+        <Form.Control id='mileage' name='mileage' type='number' placeholder='enter miles' onChange={handleChange}></Form.Control>
+    </Form.Group>
+    <Form.Group>
+        <Form.Label htmlFor='image'>Image</Form.Label>
+        <Form.Control id='image_url' name='image_url' type='file' accept='image/png, image/jpeg' onChange={handleChange}></Form.Control>
+    </Form.Group>
+    <Button type='submit'>Add Car</Button>
+</Form>
 
   )
 }
