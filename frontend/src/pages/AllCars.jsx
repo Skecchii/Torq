@@ -19,9 +19,9 @@ const AllCars = ({ cars }) => {
             {cars.map((car) => {
               return (
                 <tr key={car.id}>
-                  <td>{car.year}</td>
+                  <td>{car.model}<span style={{fontSize: 10, paddingInline: 5}}>miles:{car.mileage}</span></td>
                   <td>{car.make}</td>
-                  <td>{car.model}</td>
+                  <td>{car.year}</td>
                   <td><Link to={`/cars/${car.id}`}>
                     view
                   </Link></td>

@@ -16,7 +16,6 @@ class Car(models.Model):
     year = models.IntegerField()
     make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
-    image = models.ImageField(upload_to=upload_to, null=True, blank=True)
     mileage = models.IntegerField()
     
    

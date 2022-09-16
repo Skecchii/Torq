@@ -19,7 +19,7 @@ const initialState = {
     make: '',
     model: '',
     mileage: '',
-    image: '',
+
 }
 
 const addCar = (car) => {
@@ -91,10 +91,7 @@ Model.forEach(model => {
         <Form.Label htmlFor='mileage'>Mileage</Form.Label>
         <Form.Control id='mileage' name='mileage' type='number' placeholder='enter miles' onChange={handleChange}></Form.Control>
     </Form.Group>
-    <Form.Group>
-        <Form.Label htmlFor='image'>Image</Form.Label>
-        <Form.Control id='image_url' name='image_url' type='file' accept='image/png, image/jpeg' onChange={handleChange}></Form.Control>
-    </Form.Group>
+
     <Button type='submit'>Add Car</Button>
 </Form>
 

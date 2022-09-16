@@ -24,30 +24,20 @@ const CarDetail = ({ cars }) => {
     window.location.reload()
   };
 
-  // // function got from https://yizhiyue.me/2019/04/09/an-elegant-way-to-solve-adding-commas-between-every-3-digits-problem-in-javascript
-  // const addComma = async(num) => {
-  //   if (num === null) return;
-
-  //   return (
-  //     await num
-  //       .toString() // transform the number to string
-  //       .split("") // transform the string to array with every digit becoming an element in the array
+  // add comma from https://yizhiyue.me/2019/04/09/an-elegant-way-to-solve-adding-commas-between-every-3-digits-problem-in-javascript
+  //       .toString() // turns numbers into strings
+  //       .split() // every digit becomes an element in an array
   //       .reverse() // reverse the array so that we can start process the number from the least digit
-  //       .map((digit, index) =>
-  //         index != 0 && index % 3 === 0 ? `${digit},` : digit
-  //       ) // map every digit from the array.
-  //       // If the index is a multiple of 3 and it's not the least digit,
-  //       // that is the place we insert the comma behind.
+  //       .map((digit, index) // map every digit from the array.
+  //                           // If the index is a multiple of 3 and it's not the least digit,
+  //                           // that is the place we insert the comma behind.
   //       .reverse() // reverse back the array so that the digits are sorted in correctly display order
-  //       .join("")
-  //   ); // transform the array back to the string
-  // };
-
-  
+  //       .join() // transform the array back to the string
+//  let addComma = (num) => num.toString().split('').reverse().map((digit, index) => index != 0 && index % 3 === 0 ? `${digit},` : digit).reverse().join('')
 
   return (
     <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={`${car.image}/`} alt={car.model} />
+    
       <Card.Title>
         {car.year} {car.make} {car.model}
       </Card.Title>

@@ -20,7 +20,6 @@ const CarEdit = ({ setCars}) => {
         make: '',
         model: '',
         mileage: '',
-        image: '',
     }
     
     const [formData, setFormData] = useState(initialState)
@@ -29,7 +28,7 @@ const CarEdit = ({ setCars}) => {
         API.put(`/${carId}/update`, formData).then(res => {
             setFormData(initialState)
             setCars(res.data)
-            navigate('/cars')
+            navigate(`/cars/${carId}`)
         })
     }
 
@@ -103,10 +102,7 @@ const CarEdit = ({ setCars}) => {
         <Form.Label htmlFor='mileage'>Mileage</Form.Label>
         <Form.Control value={formData.mileage} id='mileage' name='mileage' type='number' onChange={handleChange}></Form.Control>
     </Form.Group>
-    <Form.Group>
-        <Form.Label htmlFor='image'>Image</Form.Label>
-        <Form.Control id='image' name='image' type='file' accept='image/png, image/jpeg' onChange={handleChange}></Form.Control>
-    </Form.Group>
+
     <Button type='submit'>Update Car</Button>
 </Form>
   )
