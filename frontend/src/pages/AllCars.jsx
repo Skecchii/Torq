@@ -9,9 +9,9 @@ const AllCars = ({ cars }) => {
       <Table striped bordered>
           <thead>
             <tr>
-              <th>Year</th>
-              <th>Make</th>
               <th>Model</th>
+              <th>Make</th>
+              <th>Year</th>
               <th></th>
             </tr>
           </thead>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import {  useParams, useNavigate } from 'react-router-dom'
 
-import API from 'utils/BackendAPI'
+import CarAPI from 'utils/BackendAPIS/CarBackend'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -25,16 +25,17 @@ const CarEdit = ({ setCars}) => {
     const [formData, setFormData] = useState(initialState)
 
     let updateCar = async() => {
-        API.put(`/${carId}/update`, formData).then(res => {
+        CarAPI.put(`/${carId}/update`, formData).then(res => {
             setFormData(initialState)
             setCars(res.data)
-            navigate(`/cars/${carId}`)
+            navigate(`/cars`)
+            window.location.reload()
         })
     }
 
     useEffect(() => {
         let fetchCarData = async() => {
-            let res = await API.get(`/${carId}/`)
+            let res = await CarAPI.get(`/${carId}/`)
             setFormData(res.data)
         }
         fetchCarData()

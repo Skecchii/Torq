@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import API from 'utils/BackendAPI'
+import CarAPI from 'utils/BackendAPIS/CarBackend'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -32,7 +32,7 @@ const handleChange = (e) => {
 }
 const handleSubmit = (e) => {
     e.preventDefault()
-    API.post('/create', formData).then(res => {
+    CarAPI.post('/create', formData).then(res => {
         setFormData(initialState)
         addCar(res.data)
         navigate('/cars')
