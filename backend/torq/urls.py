@@ -1,6 +1,20 @@
 from django.urls import path
 from . import views
 urlpatterns = [
+    # # note
+    path('notes', views.note_lists, name='notes'),
+    path('notes/<int:pk>/', views.note_details, name='note_details'),
+    path('notes/<int:pk>/update', views.note_details, name='note_update'),
+    path('notes/<int:pk>/delete', views.note_details, name='note_delete'),
+    path('notes/create', views.note_lists, name='note_create'),
+    
+    # maintenance
+    path('maintenance', views.maintenance_lists, name='notes'),
+    path('maintenance/<int:pk>/update', views.maintenance_details, name='note_update'),
+    path('maintenance/<int:pk>/delete', views.maintenance_details, name='note_delete'),
+    path('maintenance/create', views.maintenance_lists, name='note_create'),
+    
+    # car
     path('cars', views.cars_list, name='cars_list'),
     path('cars/<int:pk>/', views.car_details, name='car_detail'),
     path('cars/<int:pk>/update', views.car_details, name='car_update'),
